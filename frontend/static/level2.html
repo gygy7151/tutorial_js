@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Routing</title>
+        <link rel="stylesheet" href="./css/index.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body id="body">
+        <nav id="nav-bar">
+            BLUEVULPE
+            <span class="badge bg-dark">🔄</span>
+        </nav>
+        <!--로그인창-->
+        <div class="login-black-bg">
+            <div class="white-bg">
+                <form id="login-form" action="success.html">
+                    <div>
+                        <input placeholder="id" class="user-id" type="text" />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="pw"
+                            class="user-password"
+                            type="password"
+                        />
+                    </div>
+                    <button id="login-send" type="submit">전송</button>
+                    <button id="login-close" type="button">닫기</button>
+                </form>
+            </div>
+        </div>
+
+        <!--회원가입창-->
+        <div class="join-black-bg">
+            <div class="white-bg">
+                <form id="join-form">
+                    <div>
+                        <input placeholder="id" class="user-id" type="text" />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="pw"
+                            class="join-user-password"
+                            type="password"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="email"
+                            class="join-user-email"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="phone"
+                            class="join-user-phone"
+                            type="text"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            placeholder="address"
+                            class="join-user-address"
+                            type="text"
+                        />
+                    </div>
+                    <button id="join-send" type="submit">전송</button>
+                    <button id="join-close" type="button">닫기</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="main-bg">
+            <div class="title-01">Goods on Sale</div>
+            <button class="btn1">로그인</button>
+            <button class="btn2">회원가입</button>
+        </div>
+        <div style="overflow: hidden">
+            <div class="slide-container">
+                <div class="slide-box"><img src="./img/car1.png" /></div>
+                <div class="slide-box"><img src="./img/car2.png" /></div>
+                <div class="slide-box"><img src="./img/car3.png" /></div>
+            </div>
+        </div>
+        <button class="next-button">눌러봐</button>
+
+        <div class="danger-alert">5초 이내 구매시 사은품 증정!</div>
+
+        <div class="copyright">Copyrightⓒbluevulpe</div>
+
+        <script>
+            document
+                .querySelector(".login-black-bg")
+                .addEventListener("click", function (e) {
+                    // console.log(e.target); // 유저가 실제로 누른거
+                    // console.log(e.currentTarget); //이벤트리스너가 달린곳
+                    // console.log(this); // 이벤트리스너가 달린곳
+                    // e.preventDefault(); // e이벤트가 실행안되게 해줌
+                    // e.stopPropagation(); // 내 상위 요소로 이벤트 버블링 막아줌
+                    console.log(e.target);
+                    console.log(document.querySelector(".login-black-bg"));
+
+                    if (e.target == document.querySelector(".login-black-bg")) {
+                        show(".login-black-bg", "hidden");
+                    }
+                });
+
+            var 지금사진 = 1;
+            function changeSlide(photo) {
+                document.querySelector(".slide-container").style.transform =
+                    "translateX(-" + photo + "vw)";
+            }
+
+            document
+                .querySelector(".next-button")
+                .addEventListener("click", event => {
+                    console.log(
+                        document.querySelector(".slide-container")
+                            .childElementCount
+                    );
+                    if (
+                        document.querySelector(".slide-container")
+                            .childElementCount != 지금사진
+                    ) {
+                        changeSlide(`${지금사진}00`);
+                        지금사진++;
+                    } else {
+                        changeSlide(0);
+                        지금사진 = 1;
+                    }
+                });
+
+            document
+                .querySelector("#join-form")
+                .addEventListener("submit", event => {
+                    user_password = document.querySelector(
+                        ".join-user-password"
+                    ).value;
+                    user_email =
+                        document.querySelector(".join-user-email").value;
+                    document
+                        .querySelector("#join-send")
+                        .addEventListener("click", function () {
+                            if (/\S+@\S+\.\S+/.test(user_email) == false) {
+                                alert("잘못된 이메일형식입니다.");
+                            }
+
+                            if (/[A-Z]/.test(user_password) == false) {
+                                alert(
+                                    "패스워드에 대문자 최소 1개이상 넣어주세요."
+                                );
+                            }
+                        });
+
+                    event.preventDefault();
+                });
+
+            setInterval(시간줄이기, 1000);
+            let time = 5;
+            function 시간줄이기() {
+                if (time == 0) {
+                    document.querySelector(".danger-alert").style.display =
+                        "none";
+                }
+                document.querySelector(".danger-alert").innerHTML =
+                    time + "초 이내 구매시 사은품 증정!";
+                time--;
+            }
+            var count = 0;
+            document
+                .querySelector(".badge")
+                .addEventListener("click", function () {
+                    count++;
+                    console.log(count);
+                    if (count % 2 == 0) {
+                        document.querySelector("#nav-bar").style.color =
+                            "white";
+                        document.querySelector(".copyright").style.color =
+                            "white";
+                        document.querySelector(".title-01").style.color =
+                            "white";
+                        document
+                            .querySelector("#body")
+                            .classList.add("darkmode");
+                        document
+                            .querySelector("#nav-bar")
+                            .classList.add("darkmode");
+                    } else {
+                        document.querySelector("#nav-bar").style.color =
+                            "black";
+                        document.querySelector(".copyright").style.color =
+                            "black";
+
+                        document.querySelector(".title-01").style.color =
+                            "black";
+                        document
+                            .querySelector("#body")
+                            .classList.remove("darkmode");
+                        document
+                            .querySelector("#nav-bar")
+                            .classList.remove("darkmode");
+                    }
+                });
+
+            var show = function (parm, opt) {
+                document.querySelector(parm).style.visibility = opt;
+            };
+
+            document.querySelector(".btn1").onclick = function () {
+                show(".login-black-bg", "visible");
+            };
+
+            document.querySelector("#login-close").onclick = function () {
+                show(".login-black-bg", "hidden");
+            };
+
+            document.querySelector("#login-close").onclick = function () {
+                show(".login-black-bg", "hidden");
+            };
+
+            document.querySelector(".btn2").onclick = function () {
+                show(".join-black-bg", "visible");
+            };
+
+            document.querySelector("#join-close").onclick = function () {
+                show(".join-black-bg", "hidden");
+            };
+
+            document
+                .querySelector("#login-form")
+                .addEventListener("submit", event => {
+                    if (document.querySelector(".user-id").value.length == 0) {
+                        alert("id를 입력해주세요");
+                    } else if (
+                        document.querySelector(".user-password").value.length ==
+                        0
+                    ) {
+                        alert("비밀번호를 입력해주세요");
+                    }
+
+                    event.preventDefault(); /*form전송시 */
+                    user_id = document.querySelector(".user-id").value;
+                    user_pw = document.querySelector(".user-password").value;
+
+                    if (window.localStorage.getItem(user_id) == null) {
+                        alert("존재하지 않는 id입니다.");
+                    } else if (
+                        window.localStorage.getItem(user_id) != user_pw
+                    ) {
+                        alert("일치하지 않는 pw입니다.");
+                    } else {
+                        location.href = "success.html";
+                    }
+
+                    console.log(window.localStorage.getItem(user_id));
+                });
+        </script>
+    </body>
+</html>

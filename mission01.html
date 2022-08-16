@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function 삼육구게임(num) {
+        endNum = num.toString();
+        if (endNum[0] == 3 || endNum[0] == 6 || endNum[0] == 9) {
+          console.log("박수x2");
+        } else {
+          console.log("통과");
+        }
+      }
+      삼육구게임(6);
+      삼육구게임(9);
+      삼육구게임(11);
+
+      function 합격했냐(scoreA, scoreB) {
+        if (0 > scoreA || scoreA > 100 || 0 > scoreB || scoreB > 100) {
+          alert("장난하십니까?");
+        } else if (scoreA < 40 || scoreB < 40) {
+          console.log("불합격");
+        } else if (scoreA + scoreB >= 120) {
+          console.log("합격");
+        } else {
+          console.log("불합격");
+        }
+      }
+      합격했냐(70, 70);
+      합격했냐(39, 100);
+      합격했냐(50, 50);
+      합격했냐(1500, 1500);
+    </script>
+  </body>
+</html>
