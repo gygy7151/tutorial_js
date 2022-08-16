@@ -22,14 +22,12 @@
 }
 
 #nav-bar {
-    position: fixed;
     width: 100%;
     padding: 20px;
     text-align: center;
     letter-spacing: 20px;
     font-family: "Times New Roman", Times, serif;
     color: black;
-    z-index: 5;
 }
 
 .navbar-brand {
@@ -136,4 +134,8 @@ ul.list::after {
 }
 .show {
     display: block;
+}
+
+.form-hide {
+    display: none !important;
 }
