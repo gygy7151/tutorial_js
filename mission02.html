@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>태조 이성계가 태어난 년도는?</p>
+        <input type="text" id="answer" />
+        <button id="send-answer">제출</button>
+
+        <script>
+            //ms계산하기
+            function returnMs(minute, sec) {
+                return (parseInt(minute) * 60 + parseInt(sec)) * 1000;
+            }
+            // 할인된 가격 계산하기 + 추가할인
+            function discount(price, isFirstBuy) {
+                price = price - price * 0.1;
+                if (isFirstBuy == true) {
+                    price -= 1.5;
+                }
+                return parseFloat(price.toFixed(2));
+            }
+            console.log(returnMs(1, 30));
+            console.log(discount(10, true));
+            console.log(discount(70, false));
+
+            const nowDeposit = 60000;
+            var futureDeposit = 0;
+
+            function 이자율계산(budget) {
+                if (budget >= 50000) {
+                    /*값을 사용할 수는 있지만 변경할 순 없다 스코프가 다르다면*/
+                    /*은행 예금은 0.15퍼센드 구해진 값에서 한번더 또 해당금액을 0.15배해주는거임 2배해주는게 아님*/
+                    /*아..15%를 구하는게 아니라 150%를 구해야되는구나.. 그래서 1.15임*/
+                    budget *= 1.2 * 1.2;
+                } else {
+                    budget *= 1.15 * 1.15;
+                }
+                console.log(budget);
+            }
+            // 이자율계산(nowDeposit);
+
+            // console.log(몇잔마실수있늬(360));
+            function 몇잔마실수있늬(first) {
+                /*상수에서 */
+                let total = first;
+                total = (first * 2) / 3 + (((first * 2) / 3) * 2) / 3;
+                return total;
+            }
+
+            let tryCount = 0;
+
+            document
+                .querySelector("#send-answer")
+                .addEventListener("click", function () {
+                    tryCount++;
+                    userInput = document.querySelector("#answer").value;
+                    result = 나이를맞춰라(userInput);
+
+                    if (tryCount == 3 && result != true) {
+                        alert("멍청이세요 Hoxy? 다시해봐요");
+                        tryCount = 0;
+                    } else if (result != true) {
+                        alert("땡@!!!!");
+                    } else {
+                        alert("smell success to you!");
+                    }
+                });
+
+            function 나이를맞춰라(age) {
+                if (age == 1335) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            document.querySelector("#car-price").innerHTML = car2.price[0];
+        </script>
+    </body>
+</html>
