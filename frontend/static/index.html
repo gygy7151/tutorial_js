@@ -41,12 +41,6 @@
                 <option>M</option>
                 <option>S</option>
             </select>
-
-            <select class="form-select mt-2 form-hide">
-                <option>90</option>
-                <option>95</option>
-                <option>100</option>
-            </select>
         </form>
 
         <div class="container mt-5">
@@ -88,22 +82,51 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            document.querySelector(".category").addEventListener("input", e => {
-                console.log(e.target.value);
-                if (
-                    e.target.value ==
-                    document.querySelectorAll(".form-select")[0].value //셔츠
-                ) {
-                    document
-                        .querySelectorAll(".form-select")[1]
-                        .classList.toggle("form-hide");
+            let 어쩌구 = {};
 
-                    document
-                        .querySelectorAll(".form-select")[2]
-                        .classList.toggle("form-hide");
-                } else {
-                }
+            function 기계() {
+                this.이름 = "kim";
+            }
+
+            let 오브젝트 = new 기계();
+            let 오브젝트2 = new 기계();
+
+            const siz = { meme: 3, jay: 4 };
+
+            for (let key in siz) {
+                console.log(siz[key]);
+            }
+
+            const size = { 셔츠: ["90", "100", "110"], 모자: ["S", "M", "L"] };
+
+            document.querySelector(".category").addEventListener("input", e => {
+                const goodsSize = size[e.target.value];
+                const N = goodsSize.length;
+                let template = "";
+                goodsSize.forEach(function (e) {
+                    template += `<option>${e}</option>`;
+                });
+
+                document.querySelectorAll(".form-select")[1].innerHTML =
+                    template;
             });
+            // - 이코드는 단순히 UI가 들어나고 항목이 늘어나면 확장성 부족함
+            // document.querySelector(".category").addEventListener("input", e => {
+            //     console.log(e.target.value);
+            //     if (
+            //         e.target.value ==
+            //         document.querySelectorAll(".form-select")[0].value //셔츠
+            //     ) {
+            //         document
+            //             .querySelectorAll(".form-select")[1]
+            //             .classList.toggle("form-hide");
+
+            //         document
+            //             .querySelectorAll(".form-select")[2]
+            //             .classList.toggle("form-hide");
+            //     } else {
+            //     }
+            // });
         </script>
     </body>
 </html>
