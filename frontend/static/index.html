@@ -82,6 +82,17 @@
             crossorigin="anonymous"
         ></script>
         <script>
+            let 출석부 = ["박", "이", "김", "한"];
+
+            function 이름찾기(name) {
+                for (let i = 0; i < 출석부.length; i++) {
+                    if (출석부[i] == name) {
+                        //이름을 한번만 출력하려면 return사용
+                        return "이써요";
+                    }
+                }
+            }
+
             let 어쩌구 = {};
 
             function 기계() {
