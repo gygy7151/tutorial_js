@@ -13,6 +13,7 @@ var products = [
 
 function templateOutput(data) {
     let 템플릿 = "";
+    data = sorting(data);
     data.forEach(a => {
         템플릿 += `<div class="col-sm-4">
         <img src="https://via.placeholder.com/600" class="w-100" />
@@ -22,7 +23,7 @@ function templateOutput(data) {
     });
     return 템플릿;
 }
-
+// - 초기 템플릿 값
 document.querySelector(".row").innerHTML = templateOutput(products);
 
 // ajax요청하기
@@ -42,20 +43,43 @@ document.querySelector(".row").innerHTML = templateOutput(products);
 //         console.log(error);
 //     });
 
-document.querySelector(".btn").addEventListener("click", e => {
-    fetch("https://codingapple1.github.io/js/more1.json")
-        .then(data => data.json())
-        .then(data => {
-            let addedGoods = templateOutput(data);
-            document
-                .querySelector(".row")
-                .insertAdjacentHTML("beforeend", addedGoods);
-            console.log(document.querySelector(".row").childElementCount);
-            if (document.querySelector(".row").childElementCount == 9) {
-                document.querySelector(".btn").classList.add("unshow");
-            }
-        })
-        .catch(e => {
-            console.log(e);
-        });
+document.querySelector("#condition1").addEventListener("click", e => {
+    // 다나가순 정렬및 6만원이하 상품보기 기능 구현완료
+    let data = sortingRe(products, "title").filter(x => x.price <= 60000);
+    console.log(data);
+    let addedGoods = templateOutput(data);
+    let selector = document.querySelector(".row");
+
+    selector.innerHTML = "";
+    selector.insertAdjacentHTML("beforeend", addedGoods);
+
+    if (document.querySelector(".row").childElementCount == 9) {
+        document.querySelector(".btn").classList.add("unshow");
+    }
 });
+
+function sorting(arr, key) {
+    arr.sort(function (a, b) {
+        if (a[key] > b[key]) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+
+    return arr;
+}
+
+function sortingRe(arr, key) {
+    arr.sort(function (a, b) {
+        if (a[key] < b[key]) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+
+    return arr;
+}
+
+console.log(sorting(products));
